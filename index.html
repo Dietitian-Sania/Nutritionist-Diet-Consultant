@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Sania's Advanced BMI Calculator | Nutrition & Diet Consultant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+    <div class="container">
+        <div class="logo">
+            <img src="sania.png" alt="Dr. Sania Logo" style="height: 80px;">
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#calculator">BMI Calculator</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Nutritionist & Diet Consultant</h2>
+                    <p>Get detailed insights about your body composition and personalized recommendations from Dr. Sania
+                    </p>
+                    <a href="#calculator" class="btn">Calculate Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="bmi-calculator">
+            <div class="container">
+                <div class="calculator-wrapper" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+                    <div class="calculator-form"
+                        style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div class="form-section" style="margin-bottom: 25px;">
+                            <h3
+                                style="margin-bottom: 15px; font-size: 18px; color: #388E3C; position: relative; padding-bottom: 8px; border-bottom: 2px solid #C8E6C9;">
+                                1. Choose Formula</h3>
+                            <div class="form-group radio-group" style="margin-bottom: 15px;">
+                                <label
+                                    style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
+                                    <input type="radio" name="formula" value="metric" checked
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Metric (cm, kg)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="radio" name="formula" value="imperial"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Imperial (inches, lbs)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section" style="margin-bottom: 25px;">
+                            <h3
+                                style="margin-bottom: 15px; font-size: 18px; color: #388E3C; position: relative; padding-bottom: 8px; border-bottom: 2px solid #C8E6C9;">
+                                2. Basic Information</h3>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label for="age"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Age
+                                    (years):</label>
+                                <input type="number" id="age" min="2" max="120" required
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label for="gender"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Gender:</label>
+                                <select id="gender" required
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group metric-height" style="margin-bottom: 15px;">
+                                <label for="height-cm"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Height
+                                    (cm):</label>
+                                <input type="number" id="height-cm" min="50" max="300" required
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                            <div class="form-group imperial-height" style="margin-bottom: 15px; display: none;">
+                                <label for="height-ft"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Height
+                                    (ft & in):</label>
+                                <div class="height-input" style="display: flex; gap: 10px;">
+                                    <input type="number" id="height-ft" min="1" max="8" placeholder="ft"
+                                        style="flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                                    <input type="number" id="height-in" min="0" max="11" placeholder="in"
+                                        style="flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                                </div>
+                            </div>
+                            <div class="form-group metric-weight" style="margin-bottom: 15px;">
+                                <label for="weight-kg"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Weight
+                                    (kg):</label>
+                                <input type="number" id="weight-kg" min="2" max="500" required
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                            <div class="form-group imperial-weight" style="margin-bottom: 15px; display: none;">
+                                <label for="weight-lbs"
+                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Weight
+                                    (lbs):</label>
+                                <input type="number" id="weight-lbs" min="5" max="1000" required
+                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3
+                                style="margin-bottom: 15px; font-size: 18px; color: #388E3C; position: relative; padding-bottom: 8px; border-bottom: 2px solid #C8E6C9;">
+                                3. Activity Level</h3>
+                            <div class="form-group radio-group">
+                                <label
+                                    style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
+                                    <input type="radio" name="activity" value="sedentary"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Sedentary (little or no exercise)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
+                                    <input type="radio" name="activity" value="lightly_active"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Lightly active (light exercise 1-3
+                                        days/week)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
+                                    <input type="radio" name="activity" value="moderately_active"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Moderately active (moderate exercise 3-5
+                                        days/week)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
+                                    <input type="radio" name="activity" value="very_active"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Very active (hard exercise 6-7 days/week)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="radio" name="activity" value="extra_active"
+                                        style="margin-right: 10px; width: 16px; height: 16px;">
+                                    <span style="font-weight: normal;">Extra active (very hard exercise & physical
+                                        job)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 25px;">
+                    <button id="calculate-btn"
+                        style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; border: none; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; font-weight: 600; text-align: center; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width: 100%;">
+                        Calculate BMI & Get Results
+                    </button>
+                </div>
+
+                <!-- BMI Result Box -->
+                <div id="bmi-result-box"
+                    style="display: none; margin-top: 25px; background-color: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 5px solid #4CAF50;">
+                    <h3 style="color: #388E3C; margin-bottom: 15px; font-size: 18px;">Your BMI Results</h3>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="font-weight: 500;">BMI Value:</span>
+                        <span id="bmi-value" style="font-weight: 600;">--</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="font-weight: 500;">Category:</span>
+                        <span id="bmi-category"
+                            style="padding: 3px 10px; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">--</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 500;">Healthy Weight Range:</span>
+                        <span id="healthy-weight-range" style="font-weight: 600;">--</span>
+                    </div>
+                </div>
+                <script>
+                    document.getElementById('calculate-btn').addEventListener('click', function () {
+                        // Get input values (height in cm, convert to meters)
+                        const heightCm = parseFloat(document.getElementById('height-cm').value);
+                        const heightM = heightCm / 100;
+                        const weight = parseFloat(document.getElementById('weight-kg').value);
+
+                        // Calculate BMI
+                        const bmi = weight / (heightM * heightM);
+                        const roundedBMI = bmi.toFixed(1);
+
+                        // Determine category
+                        let category, categoryColor;
+                        if (bmi < 18.5) {
+                            category = 'Underweight';
+                            categoryColor = '#2196F3';
+                        } else if (bmi >= 18.5 && bmi < 25) {
+                            category = 'Normal weight';
+                            categoryColor = '#4CAF50';
+                        } else if (bmi >= 25 && bmi < 30) {
+                            category = 'Overweight';
+                            categoryColor = '#FFC107';
+                        } else {
+                            category = 'Obese';
+                            categoryColor = '#F44336';
+                        }
+
+                        // Calculate healthy weight range (CORRECTED FORMULA)
+                        const minHealthy = (18.5 * (heightM * heightM)).toFixed(1);
+                        const maxHealthy = (24.9 * (heightM * heightM)).toFixed(1);
+
+                        // Display results
+                        document.getElementById('bmi-value').textContent = roundedBMI;
+                        document.getElementById('bmi-category').textContent = category;
+                        document.getElementById('bmi-category').style.backgroundColor = categoryColor;
+                        document.getElementById('bmi-category').style.color = category === 'Overweight' ? '#333' : 'white';
+                        document.getElementById('healthy-weight-range').textContent = `${minHealthy}kg - ${maxHealthy}kg`;
+
+                        // Show result box
+                        document.getElementById('bmi-result-box').style.display = 'block';
+                    });
+                </script>
+                <div class="calculator-results" id="results-section" style="display:none">
+                    <h3>Your Results</h3>
+                    <div class="result-box">
+                        <div class="result-item">
+                            <h4>BMI</h4>
+                            <p id="bmi-result">--</p>
+                            <p id="bmi-category" class="category"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Healthy Weight Range</h4>
+                            <p id="healthy-weight">--</p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Basal Metabolic Rate (BMR)</h4>
+                            <p id="bmr-result">--</p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Daily Calorie Needs</h4>
+                            <p id="calorie-needs">--</p>
+                        </div>
+                    </div>
+
+                    <div class="interpretation">
+                        <h4>Interpretation</h4>
+                        <p id="interpretation-text"></p>
+                    </div>
+
+                    <div class="recommendations">
+                        <h4>Recommendations</h4>
+                        <ul id="recommendations-list">
+                            <!-- Will be filled by JavaScript -->
+                        </ul>
+                    </div>
+
+                    <button id="reset-btn" class="btn outline">Start Over</button>
+                </div>
+
+                <div class="calculator-info">
+                    <h3>Understanding Your Results</h3>
+                    <p>This advanced calculator provides comprehensive insights about your body composition and
+                        nutritional needs.</p>
+
+                    <div class="info-box">
+                        <h4>BMI Categories:</h4>
+                        <ul class="bmi-categories">
+                            <li><span class="category underweight">Underweight</span>: BMI less than 18.5</li>
+                            <li><span class="category normal">Normal weight</span>: BMI 18.5-24.9</li>
+                            <li><span class="category overweight">Overweight</span>: BMI 25-29.9</li>
+                            <li><span class="category obese">Obese</span>: BMI 30 or greater</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h4>About BMR</h4>
+                        <p>Basal Metabolic Rate is the number of calories your body needs at complete rest to
+                            maintain basic functions like breathing and circulation.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <h4>Activity Levels</h4>
+                        <p>Your daily calorie needs are calculated based on your activity level using the
+                            Harris-Benedict equation for accurate results.</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="services-grid">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
+
+    <!-- Service Card 1 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-utensils" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Personalized Diet Plans</h3>
+        <p style="margin: 0; color: #666;">Customized nutrition plans tailored to your health goals, dietary preferences, and lifestyle.</p>
+    </div>
+
+    <!-- Service Card 2 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-weight" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Weight Management</h3>
+        <p style="margin: 0; color: #666;">Professional guidance for healthy weight loss, weight gain, or weight maintenance programs.</p>
+    </div>
+
+    <!-- Service Card 3 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-heartbeat" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Medical Nutrition Therapy</h3>
+        <p style="margin: 0; color: #666;">Specialized diets for diabetes, heart disease, gastrointestinal disorders, and other conditions.</p>
+    </div>
+
+    <!-- Service Card 4 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-dumbbell" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Sports Nutrition</h3>
+        <p style="margin: 0; color: #666;">Performance-enhancing nutrition plans for athletes and active individuals.</p>
+    </div>
+
+    <!-- Service Card 5 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-baby" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Pediatric Nutrition</h3>
+        <p style="margin: 0; color: #666;">Nutritional guidance for children and adolescents to support healthy growth and development.</p>
+    </div>
+
+    <!-- Service Card 6 -->
+    <div onclick="scrollToAppointment()" style="background: #fff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s ease; cursor: pointer; border: 1px solid #e0e0e0;"
+         onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 6px 12px rgba(0,0,0,0.15)'"
+         onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)'">
+        <i class="fas fa-venus-mars" style="font-size: 2rem; color: #4CAF50; margin-bottom: 15px;"></i>
+        <h3 style="margin: 0 0 10px 0; color: #333;">Hormonal Balance Nutrition</h3>
+        <p style="margin: 0; color: #666;">Dietary strategies to support hormonal health for conditions like PCOS and thyroid disorders.</p>
+    </div>
+
+</div>
+
+<script>
+function scrollToAppointment() {
+    const formSection = document.getElementById('contact');
+    formSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Optional: Highlight the form briefly
+    const form = document.querySelector('.contact-form');
+    form.style.boxShadow = '0 0 0 3px rgba(76, 175, 80, 0.5)';
+    setTimeout(() => {
+        form.style.boxShadow = 'none';
+    }, 1500);
+}
+</script>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSZt0VR1Q8fAkr3dUrtn2sNzEVQK9p4pr_gw&s"
+                            alt="Dr. Sania">
+                    </div>
+                    <div class="about-text">
+                        <h2>About Dr. Sania</h2>
+                        <p>Dr. Sania is a board-certified nutritionist and dietitian with over 5 years of clinical
+                            experience. She holds a Doctorate in Nutritional Sciences from COMSATS University and has
+                            done MSc from Agriculture University.</p>
+                        <p>Dr. Sania, a certified Consultant Dietitian and proud member of the Pakistan Nutrition
+                            Society (PNS), offering expert nutrition therapy for a wide range of health issues. With
+                            experience at CMH Okara, she specializes in treating conditions like obesity, diabetes,
+                            fatty liver, blood pressure, migraines, joint pain, stomach problems, and nutritional care
+                            during pregnancy—all through personalized diet plans. Whether you're dealing with PCOS or
+                            other chronic illnesses, Dr. Tania provides holistic, food-based solutions to help you
+                            regain your health naturally.</p>
+                        <div class="credentials">
+                            <h4>Credentials:</h4>
+                            <ul>
+                                <li>BS in Food Science and Nutrition from COMSATS University</li>
+                                <li>MSc In HND from Agriculture University, Faisalabad</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="btn">Schedule a Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p>
+                            <a href="https://www.google.com/maps/place/Sahiwal,+Pakistan" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fas fa-map-marker-alt"></i> Sahiwal, Pakistan
+                            </a>
+                        </p>
+                        <p>
+                            <a href="tel:+923017996736">
+                                <i class="fas fa-phone"></i> 0301-7996736
+                            </a>
+                        </p>
+                        <p>
+                            <a
+                                href="mailto:sk9500419@gmail.com?subject=Consultation%20Request&body=Dear%20Dr.%20Sania,">
+                                <i class="fas fa-envelope"></i> sk9500419@gmail.com
+                            </a>
+                        </p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                        <p><i class="fas fa-clock"></i> Sat: 10:00 AM - 2:00 PM</p>
+                        <div class="social-links">
+
+                            <a href="https://www.instagram.com/nutri_experts_640?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                                target="_blank" rel="noopener noreferrer"
+                                style="display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: white; color: #E1306C; border-radius: 50%; transition: all 0.3s ease; font-size: 1.2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 2px solid #E1306C; text-decoration: none;">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+
+
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="appointment-form">
+                            <div class="form-group">
+                                <input type="text" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="phone" placeholder="Your Phone" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="service" required>
+                                    <option value="">Select Service</option>
+                                    <option value="Initial Consultation">Initial Consultation</option>
+                                    <option value="Weight Management">Weight Management</option>
+                                    <option value="Medical Nutrition">Medical Nutrition</option>
+                                    <option value="Sports Nutrition">Sports Nutrition</option>
+                                    <option value="Pediatric Nutrition">Pediatric Nutrition</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" placeholder="Your Message or Preferred Appointment Time"
+                                    required></textarea>
+                            </div>
+                            <button type="button" id="whatsapp-btn" class="btn">Request Appointment via
+                                WhatsApp</button>
+                        </form>
+                    </div>
+
+                    <script>
+                        document.getElementById('whatsapp-btn').addEventListener('click', function () {
+                            // Get form values
+                            const name = encodeURIComponent(document.getElementById('name').value);
+                            const email = encodeURIComponent(document.getElementById('email').value);
+                            const phone = encodeURIComponent(document.getElementById('phone').value || 'Not provided');
+                            const service = encodeURIComponent(document.getElementById('service').value);
+                            const message = encodeURIComponent(document.getElementById('message').value);
+
+                            // Validate required fields
+                            if (!name || !email || service === "Select Service" || !message) {
+                                alert('Please fill in all required fields');
+                                return;
+                            }
+
+                            // Create WhatsApp message with proper formatting
+                            const whatsappMessage =
+                                `New Appointment Request` + '%0A%0A' +  // Two new lines
+                                `*Name:* ${name}` + '%0A' +
+                                `*Email:* ${email}` + '%0A' +
+                                `*Phone:* ${phone}` + '%0A' +
+                                `*Service:* ${service}` + '%0A%0A' +  // Two new lines
+                                `*Message:*` + '%0A' +
+                                `${message}`;
+
+                            // Open WhatsApp with pre-filled message
+                            window.open(`https://wa.me/923017996736?text=${whatsappMessage}`, '_blank');
+                        });
+                    </script>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h1>
+                        <img src="sania.png" alt="Dr. Sania Logo" style="height: 80px;">
+                    </h1>
+                    <p>Evidence-based nutrition counseling for optimal health and wellness.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#calculator">BMI Calculator</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Weight Management</a></li>
+                        <li><a href="#">Medical Nutrition</a></li>
+                        <li><a href="#">Sports Nutrition</a></li>
+                        <li><a href="#">Pediatric Nutrition</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Dr. Sania - Nutrition & Diet Consultant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <style>
+        /* Mobile Navbar Styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle { display: block; }
+            .main-nav {
+                display: none;
+                width: 100%;
+                background: #fff;
+                position: absolute;
+                top: 100px;
+                left: 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                z-index: 1000;
+            }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 10px 0; }
+            .main-nav li { 
+                text-align: center; 
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+    </script>
+    <!-- Add this right before the closing </body> tag -->
+<div id="whatsapp-float" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <a href="https://wa.me/923017996736" target="_blank" style="display: block; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+        <i class="fab fa-whatsapp" style="font-size: 36px; line-height: 60px;"></i>
+    </a>
+    <div id="whatsapp-tooltip" style="position: absolute; right: 70px; bottom: 15px; background: white; color: #333; padding: 8px 12px; border-radius: 4px; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.3s ease; width: 160px; text-align: center;">
+        Chat with Dr. Sania
+    </div>
+</div>
+
+<script>
+    // WhatsApp float button hover effect
+    const whatsappFloat = document.getElementById('whatsapp-float');
+    const tooltip = document.getElementById('whatsapp-tooltip');
+    
+    whatsappFloat.addEventListener('mouseenter', function() {
+        tooltip.style.opacity = '1';
+    });
+    
+    whatsappFloat.addEventListener('mouseleave', function() {
+        tooltip.style.opacity = '0';
+    });
+    
+    // Make the button pulse occasionally
+    function pulseButton() {
+        whatsappFloat.querySelector('a').style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            whatsappFloat.querySelector('a').style.transform = 'scale(1)';
+        }, 300);
+    }
+    
+    // Pulse every 15 seconds
+    setInterval(pulseButton, 15000);
+</script>
+</body>
+
+</html>
