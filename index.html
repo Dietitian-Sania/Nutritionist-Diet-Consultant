@@ -53,18 +53,18 @@
                         <div class="form-section" style="margin-bottom: 25px;">
                             <h3
                                 style="margin-bottom: 15px; font-size: 18px; color: #388E3C; position: relative; padding-bottom: 8px; border-bottom: 2px solid #C8E6C9;">
-                                1. Choose Formula</h3>
+                                1. Height Unit</h3>
                             <div class="form-group radio-group" style="margin-bottom: 15px;">
                                 <label
                                     style="display: flex; align-items: center; margin-bottom: 10px; cursor: pointer;">
-                                    <input type="radio" name="formula" value="metric" checked
+                                    <input type="radio" name="height-unit" value="imperial" checked
                                         style="margin-right: 10px; width: 16px; height: 16px;">
-                                    <span style="font-weight: normal;">Metric (cm, kg)</span>
+                                    <span style="font-weight: normal;">Feet & Inches</span>
                                 </label>
                                 <label style="display: flex; align-items: center; cursor: pointer;">
-                                    <input type="radio" name="formula" value="imperial"
+                                    <input type="radio" name="height-unit" value="metric"
                                         style="margin-right: 10px; width: 16px; height: 16px;">
-                                    <span style="font-weight: normal;">Imperial (inches, lbs)</span>
+                                    <span style="font-weight: normal;">Centimeters (cm)</span>
                                 </label>
                             </div>
                         </div>
@@ -90,36 +90,29 @@
                                     <option value="female">Female</option>
                                 </select>
                             </div>
-                            <div class="form-group metric-height" style="margin-bottom: 15px;">
+                            <div class="form-group metric-height" style="margin-bottom: 15px; display: none;">
                                 <label for="height-cm"
                                     style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Height
                                     (cm):</label>
-                                <input type="number" id="height-cm" min="50" max="300" required
+                                <input type="number" id="height-cm" min="50" max="300"
                                     style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
                             </div>
-                            <div class="form-group imperial-height" style="margin-bottom: 15px; display: none;">
+                            <div class="form-group imperial-height" style="margin-bottom: 15px;">
                                 <label for="height-ft"
                                     style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Height
                                     (ft & in):</label>
                                 <div class="height-input" style="display: flex; gap: 10px;">
-                                    <input type="number" id="height-ft" min="1" max="8" placeholder="ft"
+                                    <input type="number" id="height-ft" min="1" max="8" placeholder="ft" required
                                         style="flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
-                                    <input type="number" id="height-in" min="0" max="11" placeholder="in"
+                                    <input type="number" id="height-in" min="0" max="11" placeholder="in" required
                                         style="flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
                                 </div>
                             </div>
-                            <div class="form-group metric-weight" style="margin-bottom: 15px;">
+                            <div class="form-group" style="margin-bottom: 15px;">
                                 <label for="weight-kg"
                                     style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Weight
                                     (kg):</label>
                                 <input type="number" id="weight-kg" min="2" max="500" required
-                                    style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
-                            </div>
-                            <div class="form-group imperial-weight" style="margin-bottom: 15px; display: none;">
-                                <label for="weight-lbs"
-                                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #333;">Weight
-                                    (lbs):</label>
-                                <input type="number" id="weight-lbs" min="5" max="1000" required
                                     style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
                             </div>
                         </div>
@@ -192,13 +185,25 @@
                 </div>
                 <script>
                     document.getElementById('calculate-btn').addEventListener('click', function () {
-                        // Get input values (height in cm, convert to meters)
-                        const heightCm = parseFloat(document.getElementById('height-cm').value);
-                        const heightM = heightCm / 100;
-                        const weight = parseFloat(document.getElementById('weight-kg').value);
+                        // Get weight in kg (always)
+                        const weightKg = parseFloat(document.getElementById('weight-kg').value);
+                        
+                        // Get height based on selected unit
+                        let heightM;
+                        if (document.querySelector('input[name="height-unit"]:checked').value === 'imperial') {
+                            // Imperial (feet/inches)
+                            const heightFt = parseFloat(document.getElementById('height-ft').value);
+                            const heightIn = parseFloat(document.getElementById('height-in').value);
+                            const totalInches = (heightFt * 12) + heightIn;
+                            heightM = totalInches * 0.0254; // Convert inches to meters
+                        } else {
+                            // Metric (cm)
+                            const heightCm = parseFloat(document.getElementById('height-cm').value);
+                            heightM = heightCm / 100; // Convert cm to meters
+                        }
 
-                        // Calculate BMI
-                        const bmi = weight / (heightM * heightM);
+                        // Calculate BMI (standard formula)
+                        const bmi = weightKg / (heightM * heightM);
                         const roundedBMI = bmi.toFixed(1);
 
                         // Determine category
@@ -217,7 +222,7 @@
                             categoryColor = '#F44336';
                         }
 
-                        // Calculate healthy weight range (CORRECTED FORMULA)
+                        // Calculate healthy weight range in kg
                         const minHealthy = (18.5 * (heightM * heightM)).toFixed(1);
                         const maxHealthy = (24.9 * (heightM * heightM)).toFixed(1);
 
@@ -230,6 +235,19 @@
 
                         // Show result box
                         document.getElementById('bmi-result-box').style.display = 'block';
+                    });
+
+                    // Toggle between height units
+                    document.querySelectorAll('input[name="height-unit"]').forEach(radio => {
+                        radio.addEventListener('change', function() {
+                            if (this.value === 'metric') {
+                                document.querySelector('.metric-height').style.display = 'block';
+                                document.querySelector('.imperial-height').style.display = 'none';
+                            } else {
+                                document.querySelector('.metric-height').style.display = 'none';
+                                document.querySelector('.imperial-height').style.display = 'block';
+                            }
+                        });
                     });
                 </script>
                 <div class="calculator-results" id="results-section" style="display:none">
@@ -396,7 +414,7 @@ function scrollToAppointment() {
                             experience at CMH Okara, she specializes in treating conditions like obesity, diabetes,
                             fatty liver, blood pressure, migraines, joint pain, stomach problems, and nutritional care
                             during pregnancy—all through personalized diet plans. Whether you're dealing with PCOS or
-                            other chronic illnesses, Dr. Tania provides holistic, food-based solutions to help you
+                            other chronic illnesses, Dr. Sania provides holistic, food-based solutions to help you
                             regain your health naturally.</p>
                         <div class="credentials">
                             <h4>Credentials:</h4>
